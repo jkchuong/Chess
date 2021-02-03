@@ -8,7 +8,7 @@ namespace ChessApp
 {
     static class Rulebook
     {
-        public static Move[] PawnMoves = new Move[]
+        public static readonly List<Move> PawnMoves = new List<Move>
         {
             new Move(1, 0),
             new Move(1, 1)

@@ -6,47 +6,13 @@ using System.Threading.Tasks;
 
 namespace ChessApp
 {
-    public class Pawn : IPieces
+    public class Pawn : Pieces
     {
-        public bool IsWhite { get; set; }
-        public bool IsFirstMove { get; set; } = true;
-        public Cell Position { get; set; }
+        private new List<Move> _possibleMoves = Rulebook.PawnMoves;
 
-        private Move[] _possibleMoves = Rulebook.PawnMoves;
-        private Move[] _legalMoves;
-
-        public Pawn(bool isWhite, Cell postion)
+        public Pawn(bool isWhite, Cell position) : base(isWhite, position)
         {
-            IsWhite = isWhite;
-            Position = postion;
-        }
-
-        // =================================
-        // Getting Methods
-        // =================================
-        public string GetPosition()
-        {
-            return Position.ToString();
-        }
-
-        public string GetPossibleMoves()
-        {
-            string listOfPossibleMoves = "";
-            foreach (Move move in _possibleMoves)
-            {
-                listOfPossibleMoves += move + ", ";
-            }
-            return listOfPossibleMoves;
-        }
-
-        public string GetLegalMoves()
-        {
-            string listOfLegalMoves = "";
-            foreach (Move move in _legalMoves)
-            {
-                listOfLegalMoves += move + ", ";
-            }
-            return listOfLegalMoves;
+            UpdateLegalMoves();
         }
 
         // =================================
@@ -54,9 +20,17 @@ namespace ChessApp
         // =================================
         public void Moving(int moveIndex)
         {
-            Move move = _legalMoves[moveIndex];
+            // This changes status of same cell after it moves
+            // How to move pieces within cells?
+            Position.ChangeStatus();
+
+            Move move = _possibleMoves[moveIndex];
             Position.X += move.MoveX;
             Position.Y += move.MoveY;
+
+            Position.ChangeStatus();
+
+            UpdateLegalMoves();
         }
 
         public void UpdateLegalMoves()

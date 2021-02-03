@@ -8,7 +8,7 @@ namespace ChessApp
 {
     public class Chessboard
     {
-        private Dictionary<int, char> chessAN = new Dictionary<int, char>()
+        private readonly Dictionary<int, char> chessAN = new Dictionary<int, char>()
         {
             {1 , 'a'},
             {2 , 'b'},

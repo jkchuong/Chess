@@ -23,5 +23,26 @@ namespace ChessTests
             string result = pawn.GetPosition();
             Assert.AreEqual(expectedOutput, result);
         }
+
+        [TestCase(true, 1, 1, 0, false)]
+        public void MovingPawnLeavesCellUnoccupied(bool colour, int x, int y, int moveIndex, bool expectedOutput)
+        {
+            Cell initialCell = new Cell(x, y);
+            var pawn = new Pawn(colour, initialCell);
+            pawn.Moving(moveIndex);
+            bool result = initialCell.IsOccupied;
+            Assert.AreEqual(expectedOutput, result);
+        }
+
+
+        [TestCase(true, 1, 1, 0, true)]
+        public void MovingPawnOccupiesCell(bool colour, int x, int y, int moveIndex, bool expectedOutput)
+        {
+            Cell initialCell = new Cell(x, y);
+            var pawn = new Pawn(colour, initialCell);
+            pawn.Moving(moveIndex);
+            bool result = pawn.Position.IsOccupied;
+            Assert.AreEqual(expectedOutput, result);
+        }
     }
 }

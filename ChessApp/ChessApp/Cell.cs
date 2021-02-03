@@ -8,7 +8,7 @@ namespace ChessApp
 {
     public class Cell
     {
-        public bool isOccupied { get; set; } = false;
+        public bool IsOccupied { get; set; } = false;
         public int X { get; set; }
         public int Y { get; set; }
 
@@ -34,7 +34,7 @@ namespace ChessApp
 
         public void ChangeStatus()
         {
-            isOccupied = !isOccupied;
+            IsOccupied = !IsOccupied;
         }
 
         public override string ToString()
