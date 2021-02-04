@@ -15,6 +15,7 @@ namespace ChessApp
         public bool IsWhite { get; set; }
         public bool IsFirstMove { get; set; } = true;
         public Cell Position { get; set; }
+        public string Name { get; set; }
 
         protected List<Move> _possibleMoves;
         protected List<Move> _legalMoves;

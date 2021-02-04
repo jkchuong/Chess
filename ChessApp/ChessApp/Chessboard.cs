@@ -8,40 +8,67 @@ namespace ChessApp
 {
     public class Chessboard
     {
-        private readonly Dictionary<int, char> chessAN = new Dictionary<int, char>()
-        {
-            {1 , 'a'},
-            {2 , 'b'},
-            {3 , 'c'},
-            {4 , 'd'},
-            {5 , 'e'},
-            {6 , 'f'},
-            {7 , 'g'},
-            {8 , 'h'}
-        };
+        //private readonly Dictionary<int, char> chessAN = new Dictionary<int, char>()
+        //{
+        //    {1 , 'a'},
+        //    {2 , 'b'},
+        //    {3 , 'c'},
+        //    {4 , 'd'},
+        //    {5 , 'e'},
+        //    {6 , 'f'},
+        //    {7 , 'g'},
+        //    {8 , 'h'}
+        //};
 
-        public List<Cell> board = new List<Cell>();
+        public Cell[,] Board { get; }
 
         public Chessboard()
         {
-            for (int xPosition = 1; xPosition <= 8; xPosition++)
+            Board = new Cell[8, 8];
+            for (int x = 1; x <= 8; x++)
             {
-                for (int yPosition = 1; yPosition <= 8; yPosition++)
+                for (int y = 1; y <= 8; y++)
                 {
-                    Cell cell = new Cell(xPosition, yPosition);
-                    board.Add(cell);
+                    Board[x-1, y-1] = new Cell(x, y);
                 }
             }
         }
 
-        public override string ToString()
+        public void ClearMarkedLegalMoves()
         {
-            string boardCells = "";
-            foreach (Cell cell in board)
+            foreach (Cell cell in Board)
             {
-                boardCells += cell.ToString() + ", ";
+                cell.IsLegalMove = false;
             }
-            return boardCells;
+        }
+
+        public void FindLegalMoves(Pieces piece)
+        {
+            switch (piece.Name)
+            {
+                case "Pawn":
+
+
+                    break;
+
+                case "Knight":
+                    
+
+                    break;
+
+                case "King":
+                    break;
+
+                case "Rook":
+                    break;
+
+                case "Bishop":
+                    break;
+
+                case "Queen":
+                    break;
+
+            }
         }
     }
 }

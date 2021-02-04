@@ -7,7 +7,8 @@ namespace ChessApp
         static void Main(string[] args)
         {
             Chessboard chessboard = new Chessboard();
-            Console.WriteLine(chessboard.ToString());
+            Console.WriteLine(chessboard.Board);
+            Pawn pawn = new Pawn(true, chessboard.Board[0, 1]);
         }
     }
 }

@@ -9,23 +9,24 @@ namespace ChessApp
     public class Cell
     {
         public bool IsOccupied { get; set; } = false;
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int Row { get; set; }
+        public int Column { get; set; }
+        public bool IsLegalMove { get; set; }
 
         public Cell()
         {
 
         }
 
-        public Cell(int x, int y)
+        public Cell(int row, int column)
         {
-            X = x;
-            Y = y;
+            Row = row;
+            Column = column;
         }
 
         public (int x, int y) GetPoint()
         {
-            return (X, Y);
+            return (Row, Column);
         }
 
         // =================================================
@@ -39,23 +40,7 @@ namespace ChessApp
 
         public override string ToString()
         {
-            return $"({X}, {Y})";
-        }
-
-        // =================================================
-        // Comparison Methods 
-        // =================================================
-
-        public override bool Equals(object obj)
-        {
-            return obj is Cell point &&
-                   X == point.X &&
-                   Y == point.Y;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(X, Y);
+            return $"({Row}, {Column})";
         }
     }
 }
