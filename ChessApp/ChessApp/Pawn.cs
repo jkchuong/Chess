@@ -8,7 +8,7 @@ namespace ChessApp
 {
     public class Pawn : Pieces
     {
-        private new List<Move> _possibleMoves = Rulebook.PawnMoves;
+        public override List<Move> PossibleMoves { get => Rulebook.PawnMoves; }
         public new string Name = "Pawn";
 
         public Pawn(bool isWhite, Cell position) : base(isWhite, position)

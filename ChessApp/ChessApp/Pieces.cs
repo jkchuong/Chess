@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessApp
 {
-    public abstract class Pieces
+    public class Pieces
     {
         // ==============================
         // Properties
@@ -17,8 +17,8 @@ namespace ChessApp
         public Cell Position { get; set; }
         public string Name { get; set; }
 
-        protected List<Move> _possibleMoves;
-        protected List<Move> _legalMoves;
+        public virtual List<Move> PossibleMoves { get; }
+        public virtual List<Move> LegalMoves { get; set; }
 
         // ==============================
         // Constructor
@@ -32,25 +32,25 @@ namespace ChessApp
         // ==============================
         // Methods
         // ==============================
-        public string GetPosition()
+        public virtual string GetPosition()
         {
             return Position.ToString();
         }
 
-        public string GetPossibleMoves()
+        public virtual string GetPossibleMoves()
         {
             string listOfPossibleMoves = "";
-            foreach (Move move in _possibleMoves)
+            foreach (Move move in PossibleMoves)
             {
                 listOfPossibleMoves += move + ", ";
             }
             return listOfPossibleMoves;
         }
 
-        public string GetLegalMoves()
+        public virtual string GetLegalMoves()
         {
             string listOfLegalMoves = "";
-            foreach (Move move in _legalMoves)
+            foreach (Move move in LegalMoves)
             {
                 listOfLegalMoves += move + ", ";
             }
