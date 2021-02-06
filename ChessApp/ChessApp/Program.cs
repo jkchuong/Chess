@@ -7,10 +7,14 @@ namespace ChessApp
         static void Main(string[] args)
         {
             Chessboard chessboard = new Chessboard();
-            Console.WriteLine(chessboard.Board);
             Pawn pawn = new Pawn(true, chessboard.Board[0, 1]);
             string pawnMoves = pawn.GetPossibleMoves();
             Console.WriteLine(pawnMoves);
+            Console.WriteLine(chessboard.Board[0,1].IsOccupied);
+            Console.WriteLine(chessboard.Board[0,0].IsOccupied);
+
+            Console.WriteLine("Chessboard information");
+            chessboard.GetBoardInformation();
         }
     }
 }

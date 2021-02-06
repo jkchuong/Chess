@@ -25,11 +25,11 @@ namespace ChessApp
         public Chessboard()
         {
             Board = new Cell[8, 8];
-            for (int x = 1; x <= 8; x++)
+            for (int x = 0; x < 8; x++)
             {
-                for (int y = 1; y <= 8; y++)
+                for (int y = 0; y < 8; y++)
                 {
-                    Board[x-1, y-1] = new Cell(x, y);
+                    Board[x, y] = new Cell(x, y);
                 }
             }
         }
@@ -38,7 +38,7 @@ namespace ChessApp
         {
             foreach (Cell cell in Board)
             {
-                cell.IsLegalMove = false;
+                
             }
         }
 
@@ -68,6 +68,14 @@ namespace ChessApp
                 case "Queen":
                     break;
 
+            }
+        }
+
+        public void GetBoardInformation()
+        {
+            foreach (Cell cell in Board)
+            {
+                Console.WriteLine(cell.IsOccupied);
             }
         }
     }
