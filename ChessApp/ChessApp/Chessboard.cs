@@ -38,44 +38,60 @@ namespace ChessApp
         {
             foreach (Cell cell in Board)
             {
-                
+                cell.IsLegal = false;
             }
         }
 
+        // Can make this shorter? (DRY)
+        // Include limits - don't let it move on another place of piece with same colour
+        // don't let it move out of bounds
+        // create method to check each of these and reuse?
         public void FindLegalMoves(Pieces piece)
         {
             switch (piece.Name)
             {
                 case "Pawn":
-
-
+                    foreach (Move move in piece.PossibleMoves)
+                    {
+                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                    }
                     break;
 
                 case "Knight":
-                    
-
+                    foreach (Move move in piece.PossibleMoves)
+                    {
+                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                    }
                     break;
 
                 case "King":
+                    foreach (Move move in piece.PossibleMoves)
+                    {
+                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                    }
                     break;
 
                 case "Rook":
+                    foreach (Move move in piece.PossibleMoves)
+                    {
+                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                    }
                     break;
 
                 case "Bishop":
+                    foreach (Move move in piece.PossibleMoves)
+                    {
+                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                    }
                     break;
 
                 case "Queen":
+                    foreach (Move move in piece.PossibleMoves)
+                    {
+                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                    }
                     break;
 
-            }
-        }
-
-        public void GetBoardInformation()
-        {
-            foreach (Cell cell in Board)
-            {
-                Console.WriteLine(cell.IsOccupied);
             }
         }
     }

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ChessApp
 {
-    public class Pawn : Pieces
+    public class Knight : Pieces
     {
-        public Pawn(bool isWhite, Cell position) : base(isWhite, position)
+        public Knight(bool isWhite, Cell position) : base(isWhite, position)
         {
-            Name = "Pawn";
-            PossibleMoves = Rulebook.PawnMoves;
+            Name = "Knight";
+            PossibleMoves = Rulebook.KnightMoves;
             Position = position;
             Position.ChangeStatus();
         }

@@ -17,7 +17,7 @@ namespace ChessApp
         public Cell Position { get; set; }
         public string Name { get; set; }
 
-        public virtual List<Move> PossibleMoves { get; }
+        public virtual List<Move> PossibleMoves { get; set; }
         public virtual List<Move> LegalMoves { get; set; }
 
         // ==============================
@@ -27,6 +27,7 @@ namespace ChessApp
         {
             IsWhite = isWhite;
             Position = position;
+            Position.piece = this;
         }
 
         // ==============================

@@ -8,18 +8,18 @@ namespace ChessApp
 {
     public class Move
     {
-        public int MoveX { get; set; }
-        public int MoveY { get; set; }
+        public int MoveRow { get; set; }
+        public int MoveColumn { get; set; }
 
         public Move(int moveX, int moveY)
         {
-            MoveX = moveX;
-            MoveY = moveY;
+            MoveRow = moveX;
+            MoveColumn = moveY;
         }
 
         public override string ToString()
         {
-            return $"({MoveX}, {MoveY})";
+            return $"({MoveRow}, {MoveColumn})";
         }
     }
 }
