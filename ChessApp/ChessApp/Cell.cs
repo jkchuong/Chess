@@ -11,7 +11,6 @@ namespace ChessApp
         public bool IsOccupied { get; set; } = false;
         public int Row { get; set; }
         public int Column { get; set; }
-        public bool IsLegalMove { get; set; }
 
         public Cell()
         {

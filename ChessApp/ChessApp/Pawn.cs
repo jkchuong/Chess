@@ -13,6 +13,12 @@ namespace ChessApp
 
         public Pawn(bool isWhite, Cell position) : base(isWhite, position)
         {
+            Position = position;
+            position.ChangeStatus();
+        }
+
+        public void Moving(int moveIndex)
+        {
             
         }
     }
