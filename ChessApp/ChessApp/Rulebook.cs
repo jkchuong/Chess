@@ -9,12 +9,20 @@ namespace ChessApp
     static class Rulebook
     {
         // Can be condensed? Make one for each direction and have it be multiplied?
+        public static readonly List<Move> WhitePawnMoves = new List<Move>
+        {
+            new Move(-2, 0),
+            new Move(-1, 0),
+            new Move(-1, 1),
+            new Move(-1, -1)
+        };
 
-        public static readonly List<Move> PawnMoves = new List<Move>
+        public static readonly List<Move> BlackPawnMoves = new List<Move>
         {
             new Move(2, 0),
             new Move(1, 0),
-            new Move(1, 1)
+            new Move(1, 1),
+            new Move(1, -1)
         };
 
         public static readonly List<Move> KnightMoves = new List<Move>

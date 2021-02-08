@@ -30,10 +30,6 @@ namespace ChessApp
             return (Row, Column);
         }
 
-        // =================================================
-        // Returning and moving cells
-        // =================================================
-
         public void ChangeStatus()
         {
             IsOccupied = !IsOccupied;

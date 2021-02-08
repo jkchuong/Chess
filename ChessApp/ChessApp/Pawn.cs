@@ -10,8 +10,16 @@ namespace ChessApp
     {
         public Pawn(bool isWhite, Cell position) : base(isWhite, position)
         {
-            Name = "Pawn";
-            PossibleMoves = Rulebook.PawnMoves;
+            if (isWhite)
+            {
+                Name = "WhitePawn";
+                PossibleMoves = Rulebook.WhitePawnMoves;
+            }
+            else
+            {
+                Name = "BlackPawn";
+                PossibleMoves = Rulebook.BlackPawnMoves;
+            }
             Position = position;
             Position.ChangeStatus();
         }

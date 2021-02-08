@@ -9,30 +9,79 @@ namespace ChessApp
         static void Main(string[] args)
         {
             Chessboard chessboard = new Chessboard();
-            Pawn whitePawn1 = new Pawn(true, chessboard.Board[1, 0]);
-            Rook blackKnight = new Knight(false, chessboard.Board[2, 2]);
-            King whiteKing = new King(false, chessboard.Board[0, 3]);
+            Pawn whitePawn = new Pawn(true, chessboard.Board[4, 3]);
+            Pawn blackPawn = new Pawn(false, chessboard.Board[6, 0]);
+            Knight blackKnight = new Knight(false, chessboard.Board[2, 2]);
+            King whiteKing = new King(false, chessboard.Board[7, 3]);
+            Rook whiteRook = new Rook(true, chessboard.Board[3, 6]);
+            Bishop blackBishop = new Bishop(false, chessboard.Board[2, 4]);
+            Queen whiteQueen = new Queen(true, chessboard.Board[1, 5]);
 
 
-            // Not setting empty cells as legal
+            Console.WriteLine("The Pieces");
+            chessboard.ClearMarkedLegalMoves();
+            PrintBoardOccupiedAndLegal(chessboard);
+
+            Console.WriteLine("=====================================================");
+
+            Console.WriteLine("White Pawn");
+            chessboard.ClearMarkedLegalMoves();
+            chessboard.FindLegalMoves(whitePawn);
+            PrintBoardOccupiedAndLegal(chessboard);
+
+            Console.WriteLine("=====================================================");
+
+            Console.WriteLine("Black Pawn");
+            chessboard.ClearMarkedLegalMoves();
+            chessboard.FindLegalMoves(blackPawn);
+            PrintBoardOccupiedAndLegal(chessboard);
+
+            Console.WriteLine("=====================================================");
+
+            Console.WriteLine("Black Rook");
             chessboard.ClearMarkedLegalMoves();
             chessboard.FindLegalMoves(blackKnight);
             PrintBoardOccupiedAndLegal(chessboard);
-            
-            Console.WriteLine("=====================================================");
-
-            chessboard.ClearMarkedLegalMoves();
-            chessboard.FindLegalMoves(whitePawn1);
-            PrintBoardOccupiedAndLegal(chessboard);
 
             Console.WriteLine("=====================================================");
 
+            Console.WriteLine("White King");
             chessboard.ClearMarkedLegalMoves();
             chessboard.FindLegalMoves(whiteKing);
             PrintBoardOccupiedAndLegal(chessboard);
 
             Console.WriteLine("=====================================================");
-            
+
+            Console.WriteLine("White Rook");
+            chessboard.ClearMarkedLegalMoves();
+            chessboard.FindLegalMoves(whiteRook);
+            PrintBoardOccupiedAndLegal(chessboard);
+
+            Console.WriteLine("=====================================================");
+
+            Console.WriteLine("Black Bishop");
+            chessboard.ClearMarkedLegalMoves();
+            chessboard.FindLegalMoves(blackBishop);
+            PrintBoardOccupiedAndLegal(chessboard);
+
+            Console.WriteLine("=====================================================");
+
+            Console.WriteLine("White Queen");
+            chessboard.ClearMarkedLegalMoves();
+            chessboard.FindLegalMoves(whiteQueen);
+            PrintBoardOccupiedAndLegal(chessboard);
+
+            Console.WriteLine("=====================================================");
+
+            Console.WriteLine("Clear Board");
+            chessboard.ClearBoard();
+            PrintBoardOccupiedAndLegal(chessboard);
+
+            Console.WriteLine("=====================================================");
+
+            Console.WriteLine("New Game");
+            chessboard.NewGame();
+            PrintBoardOccupiedAndLegal(chessboard);
         }
 
         private static void PrintBoardOccupiedAndLegal(Chessboard chessboard)
@@ -55,7 +104,7 @@ namespace ChessApp
 
                             switch (chessboard.Board[i, j].piece.Name)
                             {
-                                case "Pawn":
+                                case "WhitePawn":
                                     Console.Write("P    ");
                                     break;
 
@@ -76,7 +125,7 @@ namespace ChessApp
                                     break;
 
                                 case "Bishop":
-                                    Console.Write("K    ");
+                                    Console.Write("B    ");
                                     break;
                             }
                         }
@@ -85,7 +134,7 @@ namespace ChessApp
 
                             switch (chessboard.Board[i, j].piece.Name)
                             {
-                                case "Pawn":
+                                case "BlackPawn":
                                     Console.Write("p    ");
                                     break;
 
@@ -106,7 +155,7 @@ namespace ChessApp
                                     break;
 
                                 case "Bishop":
-                                    Console.Write("k    ");
+                                    Console.Write("b    ");
                                     break;
                             }
                         }
