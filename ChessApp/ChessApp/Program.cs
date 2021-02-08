@@ -10,7 +10,7 @@ namespace ChessApp
         {
             Chessboard chessboard = new Chessboard();
             Pawn whitePawn1 = new Pawn(true, chessboard.Board[1, 0]);
-            Knight blackKnight = new Knight(false, chessboard.Board[2, 2]);
+            Rook blackKnight = new Knight(false, chessboard.Board[2, 2]);
             King whiteKing = new King(false, chessboard.Board[0, 3]);
 
 
