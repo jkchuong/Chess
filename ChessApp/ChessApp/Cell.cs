@@ -10,7 +10,7 @@ namespace ChessApp
     {
         public bool IsOccupied { get; set; } = false;
         public bool IsLegal { get; set; } = false;
-        public Pieces piece { get; set; }
+        public Pieces piece { get; set; } = null;
         public int Row { get; set; }
         public int Column { get; set; }
 

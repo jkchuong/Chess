@@ -10,13 +10,11 @@ namespace ChessApp
         {
             Chessboard chessboard = new Chessboard();
             Pawn whitePawn1 = new Pawn(true, chessboard.Board[1, 0]);
-            Knight blackKnight = new Knight(false, chessboard.Board[3, 4]);
-            King whiteKing = new King(true, chessboard.Board[1, 4]);
+            Knight blackKnight = new Knight(false, chessboard.Board[2, 2]);
+            King whiteKing = new King(false, chessboard.Board[0, 3]);
 
-            //Console.WriteLine(pawnMoves);
-            //Console.WriteLine(chessboard.Board[0,1].IsOccupied);
-            //Console.WriteLine(chessboard.Board[0,0].IsOccupied);
 
+            // Not setting empty cells as legal
             chessboard.ClearMarkedLegalMoves();
             chessboard.FindLegalMoves(blackKnight);
             PrintBoardOccupiedAndLegal(chessboard);
@@ -33,7 +31,8 @@ namespace ChessApp
             chessboard.FindLegalMoves(whiteKing);
             PrintBoardOccupiedAndLegal(chessboard);
 
-
+            Console.WriteLine("=====================================================");
+            
         }
 
         private static void PrintBoardOccupiedAndLegal(Chessboard chessboard)
@@ -47,7 +46,11 @@ namespace ChessApp
                 {
                     if (chessboard.Board[i, j].IsOccupied)
                     {
-                        if (chessboard.Board[i, j].piece.IsWhite)
+                        if (chessboard.Board[i, j].IsLegal)
+                        {
+                            Console.Write("X    ");
+                        }
+                        else if (chessboard.Board[i, j].piece.IsWhite)
                         {
 
                             switch (chessboard.Board[i, j].piece.Name)
@@ -91,7 +94,7 @@ namespace ChessApp
                                     break;
 
                                 case "King":
-                                    Console.Write("k   ");
+                                    Console.Write("k    ");
                                     break;
 
                                 case "Queen":
@@ -122,48 +125,5 @@ namespace ChessApp
             }
         }
 
-        private static void PrintBoardOccupied(Chessboard chessboard)
-        {
-            int rowLength = chessboard.Board.GetLength(0);
-            int colLength = chessboard.Board.GetLength(1);
-
-            for (int i = 0; i < rowLength; i++)
-            {
-                for (int j = 0; j < colLength; j++)
-                {
-                    if (chessboard.Board[i, j].IsOccupied)
-                    {
-                        Console.Write("O    ");
-                    }
-                    else
-                    {
-                        Console.Write("-    ");
-                    }
-                }
-                Console.Write(Environment.NewLine + Environment.NewLine);
-            }
-        }
-
-        private static void PrintBoardLegal(Chessboard chessboard)
-        {
-            int rowLength = chessboard.Board.GetLength(0);
-            int colLength = chessboard.Board.GetLength(1);
-
-            for (int i = 0; i < rowLength; i++)
-            {
-                for (int j = 0; j < colLength; j++)
-                {
-                    if (chessboard.Board[i, j].IsLegal)
-                    {
-                        Console.Write("O    ");
-                    }
-                    else
-                    {
-                        Console.Write("-    ");
-                    }
-                }
-                Console.Write(Environment.NewLine + Environment.NewLine);
-            }
-        }
     }
 }

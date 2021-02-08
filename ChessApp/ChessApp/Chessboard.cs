@@ -34,11 +34,40 @@ namespace ChessApp
             }
         }
 
+        public bool IsOnBoard(int row, int column)
+        {
+            if (row >= 8 || column >= 8 || row < 0 || column < 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool IsDifferentColour(bool isWhite, bool otherPieceWhite)
+        {
+            if((isWhite && otherPieceWhite) || (!isWhite && !otherPieceWhite))
+            {
+                return false;
+            }
+            return true;
+        }
+
         public void ClearMarkedLegalMoves()
         {
             foreach (Cell cell in Board)
             {
                 cell.IsLegal = false;
+            }
+        }
+
+        // How to delete all pieces?
+        public void ClearBoard()
+        {
+            foreach (Cell cell in Board)
+            {
+                cell.IsLegal = false;
+                cell.IsOccupied = false;
+                cell.piece = null;
             }
         }
 
@@ -53,42 +82,128 @@ namespace ChessApp
                 case "Pawn":
                     foreach (Move move in piece.PossibleMoves)
                     {
-                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                        int desitinationRow = piece.Position.Row + move.MoveRow;
+                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
+
+                        if (IsOnBoard(desitinationRow, desitnationColumn))
+                        {
+                            if (Board[desitinationRow, desitnationColumn].piece == null)
+                            {
+                                Board[desitinationRow, desitnationColumn].IsLegal = true;
+                            }
+                            else
+                            {
+                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                {
+                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
+                                }
+                            }
+                        }
                     }
                     break;
 
                 case "Knight":
                     foreach (Move move in piece.PossibleMoves)
                     {
-                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                        int desitinationRow = piece.Position.Row + move.MoveRow;
+                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
+
+                        if (IsOnBoard(desitinationRow, desitnationColumn))
+                        {
+                            if (Board[desitinationRow, desitnationColumn].piece == null)
+                            {
+                                Board[desitinationRow, desitnationColumn].IsLegal = true;
+                            }
+                            else
+                            {
+                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                {
+                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
+                                }
+                            }
+                        }
                     }
                     break;
 
                 case "King":
                     foreach (Move move in piece.PossibleMoves)
                     {
-                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                        int desitinationRow = piece.Position.Row + move.MoveRow;
+                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
+                        if (IsOnBoard(desitinationRow, desitnationColumn))
+                        {
+                            if (Board[desitinationRow, desitnationColumn].piece == null)
+                            {
+                                Board[desitinationRow, desitnationColumn].IsLegal = true;
+                            }
+                            else
+                            {
+                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                {
+                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
+                                }
+                            }
+                        }
                     }
                     break;
 
                 case "Rook":
                     foreach (Move move in piece.PossibleMoves)
                     {
-                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                        int desitinationRow = piece.Position.Row + move.MoveRow;
+                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
+                        if (IsOnBoard(desitinationRow, desitnationColumn))
+                        {
+                            if (Board[desitinationRow, desitnationColumn].piece != null)
+                            {
+                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                {
+                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
+                                }
+
+                                Board[desitinationRow, desitnationColumn].IsLegal = true;
+                            }
+                        }
                     }
                     break;
 
                 case "Bishop":
                     foreach (Move move in piece.PossibleMoves)
                     {
-                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                        int desitinationRow = piece.Position.Row + move.MoveRow;
+                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
+                        if (IsOnBoard(desitinationRow, desitnationColumn))
+                        {
+                            if (Board[desitinationRow, desitnationColumn].piece != null)
+                            {
+                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                {
+                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
+                                }
+
+                                Board[desitinationRow, desitnationColumn].IsLegal = true;
+                            }
+                        }
                     }
                     break;
 
                 case "Queen":
                     foreach (Move move in piece.PossibleMoves)
                     {
-                        Board[piece.Position.Row + move.MoveRow, piece.Position.Column + move.MoveColumn].IsLegal = true;
+                        int desitinationRow = piece.Position.Row + move.MoveRow;
+                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
+                        if (IsOnBoard(desitinationRow, desitnationColumn))
+                        {
+                            if (Board[desitinationRow, desitnationColumn].piece != null)
+                            {
+                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                {
+                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
+                                }
+
+                                Board[desitinationRow, desitnationColumn].IsLegal = true;
+                            }
+                        }
                     }
                     break;
 
