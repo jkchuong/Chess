@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessApp
 {
-    public class Knight : Pieces
+    public class Knight : Pieces, IPiece
     {
         public Knight(bool isWhite, Cell position) : base(isWhite, position)
         {

@@ -9,6 +9,8 @@ namespace ChessApp
         static void Main(string[] args)
         {
             Chessboard chessboard = new Chessboard();
+
+            // IPiece interface? Wanna be able to get it all in a list.
             Pawn whitePawn = new Pawn(true, chessboard.Board[4, 3]);
             Pawn blackPawn = new Pawn(false, chessboard.Board[6, 0]);
             Knight blackKnight = new Knight(false, chessboard.Board[2, 2]);
@@ -73,6 +75,13 @@ namespace ChessApp
 
             Console.WriteLine("=====================================================");
 
+            Console.WriteLine("Before Move");
+            chessboard.MovePiece(whiteQueen, chessboard.Board[2, 4]);
+            chessboard.ClearMarkedLegalMoves();
+            PrintBoardOccupiedAndLegal(chessboard);
+
+            Console.WriteLine("=====================================================");
+
             Console.WriteLine("Clear Board");
             chessboard.ClearBoard();
             PrintBoardOccupiedAndLegal(chessboard);
@@ -82,6 +91,8 @@ namespace ChessApp
             Console.WriteLine("New Game");
             chessboard.NewGame();
             PrintBoardOccupiedAndLegal(chessboard);
+
+
         }
 
         private static void PrintBoardOccupiedAndLegal(Chessboard chessboard)

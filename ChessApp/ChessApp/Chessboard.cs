@@ -282,5 +282,24 @@ namespace ChessApp
             Rook blackRook2 = new Rook(false, Board[0, 7]);
 
         }
+
+        public void MovePiece(Pieces piece, Cell cell)
+        {
+            ClearMarkedLegalMoves();
+            FindLegalMoves(piece);
+
+            if (cell.IsLegal)
+            {
+                piece.Position.ChangeStatus();
+                piece.Position = cell;
+                cell.piece = piece;
+
+                if (!cell.IsOccupied)
+                {
+                    cell.ChangeStatus();
+                }
+            }
+            
+        }
     }
 }

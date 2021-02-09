@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace ChessApp
 {
-    public class Pieces
+    public abstract class Pieces : IPiece
     {
-        // ==============================
-        // Properties
-        // ==============================
-
         public bool IsWhite { get; set; }
         public bool IsFirstMove { get; set; } = true;
         public Cell Position { get; set; }
@@ -20,9 +16,6 @@ namespace ChessApp
         public virtual List<Move> PossibleMoves { get; set; }
         public virtual List<Move> LegalMoves { get; set; }
 
-        // ==============================
-        // Constructor
-        // ==============================
         public Pieces(bool isWhite, Cell position)
         {
             IsWhite = isWhite;
@@ -30,9 +23,6 @@ namespace ChessApp
             Position.piece = this;
         }
 
-        // ==============================
-        // Methods
-        // ==============================
         public virtual string GetPosition()
         {
             return Position.ToString();
