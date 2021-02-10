@@ -91,68 +91,67 @@ namespace ChessApp
                         {
                             Console.Write("X    ");
                         }
-                        else if (chessboard.Board[i, j].piece.IsWhite)
+                        else
                         {
-
                             switch (chessboard.Board[i, j].piece.Name)
                             {
-                                case "WhitePawn":
+                                case "Pawn":
+                                    if(chessboard.Board[i, j].piece.IsWhite)
                                     Console.Write("P    ");
+                                    else
+                                    {
+                                        Console.WriteLine("p    ");
+                                    }
                                     break;
 
                                 case "Knight":
-                                    Console.Write("N    ");
+                                    if (chessboard.Board[i, j].piece.IsWhite)
+                                        Console.Write("N   ");
+                                    else
+                                    {
+                                        Console.WriteLine("n    ");
+                                    }
                                     break;
 
                                 case "King":
-                                    Console.Write("K    ");
+                                    if (chessboard.Board[i, j].piece.IsWhite)
+                                        Console.Write("K    ");
+                                    else
+                                    {
+                                        Console.WriteLine("k    ");
+                                    }
                                     break;
 
                                 case "Queen":
-                                    Console.Write("Q    ");
+                                    if (chessboard.Board[i, j].piece.IsWhite)
+                                        Console.Write("Q    ");
+                                    else
+                                    {
+                                        Console.WriteLine("q    ");
+                                    }
                                     break;
 
                                 case "Rook":
-                                    Console.Write("R    ");
+                                    if (chessboard.Board[i, j].piece.IsWhite)
+                                        Console.Write("R    ");
+                                    else
+                                    {
+                                        Console.WriteLine("r    ");
+                                    }
                                     break;
 
                                 case "Bishop":
-                                    Console.Write("B    ");
+                                    if (chessboard.Board[i, j].piece.IsWhite)
+                                        Console.Write("B    ");
+                                    else
+                                    {
+                                        Console.WriteLine("b    ");
+                                    }
                                     break;
                             }
                         }
-                        else if (!chessboard.Board[i, j].piece.IsWhite)
-                        {
-
-                            switch (chessboard.Board[i, j].piece.Name)
-                            {
-                                case "BlackPawn":
-                                    Console.Write("p    ");
-                                    break;
-
-                                case "Knight":
-                                    Console.Write("n    ");
-                                    break;
-
-                                case "King":
-                                    Console.Write("k    ");
-                                    break;
-
-                                case "Queen":
-                                    Console.Write("q    ");
-                                    break;
-
-                                case "Rook":
-                                    Console.Write("r    ");
-                                    break;
-
-                                case "Bishop":
-                                    Console.Write("b    ");
-                                    break;
-                            }
-                        }
-
                     }
+
                     else if (chessboard.Board[i, j].IsLegal)
                     {
                         Console.Write("X    ");

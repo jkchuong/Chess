@@ -32,7 +32,7 @@ namespace ChessApp
             return true;
         }
 
-        public bool IsDifferentColour(bool isWhite, bool otherPieceWhite)
+        public bool IsOppositeColour(bool isWhite, bool otherPieceWhite)
         {
             if((isWhite && otherPieceWhite) || (!isWhite && !otherPieceWhite))
             {
@@ -73,42 +73,41 @@ namespace ChessApp
         {
             switch (piece.Name)
             {
-                case "BlackPawn":
+                case "Pawn":
                     foreach (Move move in piece.PossibleMoves)
                     {
                         int desitinationRow = piece.Position.Row + move.MoveRow;
                         int desitnationColumn = piece.Position.Column + move.MoveColumn;
+
                         if (IsOnBoard(desitinationRow, desitnationColumn))
                         {
-                            if (Board[desitinationRow, desitnationColumn].piece == null)
+                            // move 2 only if first move and empty or occupied by opposite colour and it's the first move
+                            if (Math.Abs(move.MoveRow) == 2)
                             {
-                                Board[desitinationRow, desitnationColumn].IsLegal = true;
+                                if (piece.IsFirstMove &&
+                                    (Board[desitinationRow, desitnationColumn].piece == null
+                                    || IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite)))
+                                {
+                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
+                                    piece.IsFirstMove = false;
+                                }
                             }
-                            else
+
+                            // move diagonally only if it's occupied by opposite colour
+                            else if (desitinationRow != piece.Position.Row && desitnationColumn != piece.Position.Column)
                             {
-                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                if (Board[desitinationRow, desitnationColumn].IsOccupied
+                                    && IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
                                 {
                                     Board[desitinationRow, desitnationColumn].IsLegal = true;
                                 }
                             }
-                        }
-                    }
-                    break;
-
-                case "WhitePawn":
-                    foreach (Move move in piece.PossibleMoves)
-                    {
-                        int desitinationRow = piece.Position.Row + move.MoveRow;
-                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
-                        if (IsOnBoard(desitinationRow, desitnationColumn))
-                        {
-                            if (Board[desitinationRow, desitnationColumn].piece == null)
-                            {
-                                Board[desitinationRow, desitnationColumn].IsLegal = true;
-                            }
+                            
+                            // Moving forward by 1
                             else
                             {
-                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                if (!Board[desitinationRow, desitnationColumn].IsOccupied
+                                    || IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
                                 {
                                     Board[desitinationRow, desitnationColumn].IsLegal = true;
                                 }
@@ -130,7 +129,7 @@ namespace ChessApp
                             }
                             else
                             {
-                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
                                 {
                                     Board[desitinationRow, desitnationColumn].IsLegal = true;
                                 }
@@ -152,7 +151,7 @@ namespace ChessApp
                             }
                             else
                             {
-                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
                                 {
                                     Board[desitinationRow, desitnationColumn].IsLegal = true;
                                 }
@@ -174,7 +173,7 @@ namespace ChessApp
                             }
                             else
                             {
-                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
                                 {
                                     Board[desitinationRow, desitnationColumn].IsLegal = true;
                                 }
@@ -196,7 +195,7 @@ namespace ChessApp
                             }
                             else
                             {
-                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
                                 {
                                     Board[desitinationRow, desitnationColumn].IsLegal = true;
                                 }
@@ -218,7 +217,7 @@ namespace ChessApp
                             }
                             else
                             {
-                                if (IsDifferentColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
+                                if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
                                 {
                                     Board[desitinationRow, desitnationColumn].IsLegal = true;
                                 }

@@ -13,11 +13,8 @@ namespace ChessApp
             string pieceInitial = "";
             switch (piece.Name)
             {
-                case "WhitePawn":
+                case "Pawn":
                     pieceInitial = "P";
-                    break;
-                case "BlackPawn":
-                    pieceInitial = "p";
                     break;
                 case "Knight":
                     pieceInitial = "N";
