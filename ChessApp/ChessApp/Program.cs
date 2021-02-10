@@ -38,6 +38,7 @@ namespace ChessApp
             foreach(Pieces piece in pieces)
             {
                 Console.WriteLine("=====================================================");
+                Console.WriteLine(piece.Name);
                 chessboard.ClearMarkedLegalMoves();
                 chessboard.FindLegalMoves(piece);
                 PrintBoardOccupiedAndLegal(chessboard);

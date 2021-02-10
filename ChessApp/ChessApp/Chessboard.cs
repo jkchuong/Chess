@@ -71,161 +71,87 @@ namespace ChessApp
 
         public void FindLegalMoves(Pieces piece)
         {
-            switch (piece.Name)
+            if (piece.Name == "Pawn")
             {
-                case "Pawn":
-                    foreach (Move move in piece.PossibleMoves)
+                foreach (Move move in piece.PossibleMoves)
+                {
+                    int desitinationRow = piece.Position.Row + move.MoveRow;
+                    int desitnationColumn = piece.Position.Column + move.MoveColumn;
+
+                    if (IsOnBoard(desitinationRow, desitnationColumn))
                     {
-                        int desitinationRow = piece.Position.Row + move.MoveRow;
-                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
-
-                        if (IsOnBoard(desitinationRow, desitnationColumn))
+                        // move 2 only if first move and empty or occupied by opposite colour and it's the first move
+                        if (Math.Abs(move.MoveRow) == 2)
                         {
-                            // move 2 only if first move and empty or occupied by opposite colour and it's the first move
-                            if (Math.Abs(move.MoveRow) == 2)
+                            if (piece.IsFirstMove &&
+                                (Board[desitinationRow, desitnationColumn].piece == null
+                                || IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite)))
                             {
-                                if (piece.IsFirstMove &&
-                                    (Board[desitinationRow, desitnationColumn].piece == null
-                                    || IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite)))
-                                {
-                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
-                                    piece.IsFirstMove = false;
-                                }
-                            }
-
-                            // move diagonally only if it's occupied by opposite colour
-                            else if (desitinationRow != piece.Position.Row && desitnationColumn != piece.Position.Column)
-                            {
-                                if (Board[desitinationRow, desitnationColumn].IsOccupied
-                                    && IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
-                                {
-                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
-                                }
-                            }
-                            
-                            // Moving forward by 1
-                            else
-                            {
-                                if (!Board[desitinationRow, desitnationColumn].IsOccupied
-                                    || IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
-                                {
-                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
-                                }
+                                Board[desitinationRow, desitnationColumn].IsLegal = true;
+                                piece.IsFirstMove = false;
                             }
                         }
-                    }
-                    break;
 
-                case "Knight":
-                    foreach (Move move in piece.PossibleMoves)
-                    {
-                        int desitinationRow = piece.Position.Row + move.MoveRow;
-                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
-                        if (IsOnBoard(desitinationRow, desitnationColumn))
+                        // move diagonally only if it's occupied by opposite colour
+                        else if (desitinationRow != piece.Position.Row && desitnationColumn != piece.Position.Column)
                         {
-                            if (Board[desitinationRow, desitnationColumn].piece == null)
+                            if (Board[desitinationRow, desitnationColumn].IsOccupied
+                                && IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
                             {
                                 Board[desitinationRow, desitnationColumn].IsLegal = true;
                             }
-                            else
-                            {
-                                if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
-                                {
-                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
-                                }
-                            }
                         }
-                    }
-                    break;
 
-                case "King":
-                    foreach (Move move in piece.PossibleMoves)
-                    {
-                        int desitinationRow = piece.Position.Row + move.MoveRow;
-                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
-                        if (IsOnBoard(desitinationRow, desitnationColumn))
+                        // Moving forward by 1
+                        else
                         {
-                            if (Board[desitinationRow, desitnationColumn].piece == null)
+                            if (!Board[desitinationRow, desitnationColumn].IsOccupied
+                                || IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
                             {
                                 Board[desitinationRow, desitnationColumn].IsLegal = true;
                             }
-                            else
-                            {
-                                if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
-                                {
-                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
-                                }
-                            }
                         }
                     }
-                    break;
+                }
+            }
 
-                case "Rook":
-                    foreach (Move move in piece.PossibleMoves)
+            else if (piece.Name == "King" || piece.Name == "Knight")
+            {
+                foreach (Move move in piece.PossibleMoves)
+                {
+                    int desitinationRow = piece.Position.Row + move.MoveRow;
+                    int desitnationColumn = piece.Position.Column + move.MoveColumn;
+                    if (IsOnBoard(desitinationRow, desitnationColumn))
                     {
-                        int desitinationRow = piece.Position.Row + move.MoveRow;
-                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
-                        if (IsOnBoard(desitinationRow, desitnationColumn))
+                        if (Board[desitinationRow, desitnationColumn].piece == null)
                         {
-                            if (Board[desitinationRow, desitnationColumn].piece == null)
+                            Board[desitinationRow, desitnationColumn].IsLegal = true;
+                        }
+                        else
+                        {
+                            if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
                             {
                                 Board[desitinationRow, desitnationColumn].IsLegal = true;
                             }
-                            else
-                            {
-                                if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
-                                {
-                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
-                                }
-                            }
                         }
                     }
-                    break;
+                }
+            }
+            
+            else if (piece.Name == "Rook")
+            {
+                CheckRookObstruction(piece);
+            }
 
-                case "Bishop":
-                    foreach (Move move in piece.PossibleMoves)
-                    {
-                        int desitinationRow = piece.Position.Row + move.MoveRow;
-                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
-                        if (IsOnBoard(desitinationRow, desitnationColumn))
-                        {
-                            if (Board[desitinationRow, desitnationColumn].piece == null)
-                            {
-                                Board[desitinationRow, desitnationColumn].IsLegal = true;
-                            }
-                            else
-                            {
-                                if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
-                                {
-                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
-                                }
-                            }
-                        }
-                    }
-                    break;
+            else if (piece.Name == "Bishop")
+            {
+                CheckBishopObstruction(piece);
+            }
 
-                case "Queen":
-                    foreach (Move move in piece.PossibleMoves)
-                    {
-                        int desitinationRow = piece.Position.Row + move.MoveRow;
-                        int desitnationColumn = piece.Position.Column + move.MoveColumn;
-                        if (IsOnBoard(desitinationRow, desitnationColumn))
-                        {
-                            if (Board[desitinationRow, desitnationColumn].piece == null)
-                            {
-                                Board[desitinationRow, desitnationColumn].IsLegal = true;
-                            }
-                            else
-                            {
-                                if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, desitnationColumn].piece.IsWhite))
-                                {
-                                    Board[desitinationRow, desitnationColumn].IsLegal = true;
-                                }
-                            }
-                        }
-                    }
-                    break;
-
+            else if (piece.Name == "Queen")
+            {
+                CheckRookObstruction(piece);
+                CheckBishopObstruction(piece);
             }
         }
 
@@ -286,6 +212,251 @@ namespace ChessApp
                 }
             }
             
+        }
+
+        public void CheckRookObstruction(Pieces piece)
+        {
+            // backward movement
+            bool Unobstructed = true;
+            int movement = 1;
+            do
+            {
+                int desitinationRow = piece.Position.Row + movement;
+                if (IsOnBoard(desitinationRow, piece.Position.Column))
+                {
+                    if (Board[desitinationRow, piece.Position.Column].piece == null)
+                    {
+                        Board[desitinationRow, piece.Position.Column].IsLegal = true;
+                    }
+                    else 
+                    {
+                        if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, piece.Position.Column].piece.IsWhite))
+                        {
+                            Board[desitinationRow, piece.Position.Column].IsLegal = true;
+                        }
+                        Unobstructed = false;
+                    }
+                    ++movement;
+                }
+                else
+                {
+                    Unobstructed = false;
+                }
+            }
+            while (Unobstructed);
+
+            // forward movement
+            Unobstructed = true;
+            movement = 1;
+            do
+            {
+                int desitinationRow = piece.Position.Row - movement;
+                if (IsOnBoard(desitinationRow, piece.Position.Column))
+                {
+                    if (Board[desitinationRow, piece.Position.Column].piece == null)
+                    {
+                        Board[desitinationRow, piece.Position.Column].IsLegal = true;
+                    }
+                    else 
+                    {
+                        if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, piece.Position.Column].piece.IsWhite))
+                        {
+                            Board[desitinationRow, piece.Position.Column].IsLegal = true;
+                        }
+                        Unobstructed = false;
+                    }
+                    ++movement;
+                }
+                else
+                {
+                    Unobstructed = false;
+                }
+            }
+            while (Unobstructed);
+
+            // left movement
+            Unobstructed = true;
+            movement = 1;
+            do
+            {
+                int destinationColumn = piece.Position.Column - movement;
+                if (IsOnBoard(piece.Position.Row, destinationColumn))
+                {
+                    if (Board[piece.Position.Row, destinationColumn].piece == null)
+                    {
+                        Board[piece.Position.Row, destinationColumn].IsLegal = true;
+                    }
+                    else 
+                    {
+                        if (IsOppositeColour(piece.IsWhite, Board[piece.Position.Row, destinationColumn].piece.IsWhite))
+                        {
+                            Board[piece.Position.Row, destinationColumn].IsLegal = true;
+                        }
+                        Unobstructed = false;
+                    }
+                    ++movement;
+                }
+                else
+                {
+                    Unobstructed = false;
+                }
+            }
+            while (Unobstructed);
+
+            // right movement
+            Unobstructed = true;
+            movement = 1;
+            do
+            {
+                int destinationColumn = piece.Position.Column + movement;
+                if (IsOnBoard(piece.Position.Row, destinationColumn))
+                {
+                    if (Board[piece.Position.Row, destinationColumn].piece == null)
+                    {
+                        Board[piece.Position.Row, destinationColumn].IsLegal = true;
+                    }
+                    else 
+                    {
+                        if (IsOppositeColour(piece.IsWhite, Board[piece.Position.Row, destinationColumn].piece.IsWhite))
+                        {
+                            Board[piece.Position.Row, destinationColumn].IsLegal = true;
+                        }
+                        Unobstructed = false;
+                    }
+                    ++movement;
+                }
+                else
+                {
+                    Unobstructed = false;
+                }
+            }
+            while (Unobstructed);
+        }
+
+        private void CheckBishopObstruction(Pieces piece)
+        {
+            // backward movement
+            bool Unobstructed = true;
+            int movement = 1;
+            do
+            {
+                int desitinationRow = piece.Position.Row + movement;
+                int destinationColumn = piece.Position.Column + movement;
+                if (IsOnBoard(desitinationRow, destinationColumn))
+                {
+                    if (Board[desitinationRow, destinationColumn].piece == null)
+                    {
+                        Board[desitinationRow, destinationColumn].IsLegal = true;
+                    }
+                    else 
+                    {
+                        if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, destinationColumn].piece.IsWhite))
+                        {
+                            Board[desitinationRow, destinationColumn].IsLegal = true;
+                        }
+                        Unobstructed = false;
+                    }
+                    ++movement;
+                }
+                else
+                {
+                    Unobstructed = false;
+                }
+            }
+            while (Unobstructed);
+
+            // forward movement
+            Unobstructed = true;
+            movement = 1;
+            do
+            {
+                int desitinationRow = piece.Position.Row - movement;
+                int destinationColumn = piece.Position.Column + movement;
+
+                if (IsOnBoard(desitinationRow, destinationColumn))
+                {
+                    if (Board[desitinationRow, destinationColumn].piece == null)
+                    {
+                        Board[desitinationRow, destinationColumn].IsLegal = true;
+                    }
+                    else 
+                    {
+                        if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, destinationColumn].piece.IsWhite))
+                        {
+                            Board[desitinationRow, destinationColumn].IsLegal = true;
+                        }
+                        Unobstructed = false;
+                    }
+                    ++movement;
+                }
+                else
+                {
+                    Unobstructed = false;
+                }
+            }
+            while (Unobstructed);
+
+            // left movement
+            Unobstructed = true;
+            movement = 1;
+            do
+            {
+                int desitinationRow = piece.Position.Row + movement;
+                int destinationColumn = piece.Position.Column - movement;
+
+                if (IsOnBoard(desitinationRow, destinationColumn))
+                {
+                    if (Board[desitinationRow, destinationColumn].piece == null)
+                    {
+                        Board[desitinationRow, destinationColumn].IsLegal = true;
+                    }
+                    else 
+                    {
+                        if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, destinationColumn].piece.IsWhite))
+                        {
+                            Board[desitinationRow, destinationColumn].IsLegal = true;
+                        }
+                        Unobstructed = false;
+                    }
+                    ++movement;
+                }
+                else
+                {
+                    Unobstructed = false;
+                }
+            }
+            while (Unobstructed);
+
+            // right movement
+            Unobstructed = true;
+            movement = 1;
+            do
+            {
+                int desitinationRow = piece.Position.Row - movement;
+                int destinationColumn = piece.Position.Column - movement;
+
+                if (IsOnBoard(desitinationRow, destinationColumn))
+                {
+                    if (Board[desitinationRow, destinationColumn].piece == null)
+                    {
+                        Board[desitinationRow, destinationColumn].IsLegal = true;
+                    }
+                    else 
+                    {
+                        if (IsOppositeColour(piece.IsWhite, Board[desitinationRow, destinationColumn].piece.IsWhite))
+                        {
+                            Board[desitinationRow, destinationColumn].IsLegal = true;
+                        }
+                        Unobstructed = false;
+                    }
+                    ++movement;
+                }
+                else
+                {
+                    Unobstructed = false;
+                }
+            }
+            while (Unobstructed);
         }
     }
 }

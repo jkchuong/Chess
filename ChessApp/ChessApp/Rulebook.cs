@@ -127,6 +127,8 @@ namespace ChessApp
 
         public static readonly List<Move> RookMoves = new List<Move>
         {
+            // forward
+
             new Move(1, 0),
             new Move(2, 0),
             new Move(3, 0),
