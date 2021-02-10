@@ -6,8 +6,82 @@ using System.Threading.Tasks;
 
 namespace ChessApp
 {
-    static class Rulebook
+    public static class Rulebook
     {
+        public static string ConvertPieceToInitial(Pieces piece)
+        {
+            string pieceInitial = "";
+            switch (piece.Name)
+            {
+                case "WhitePawn":
+                    pieceInitial = "P";
+                    break;
+                case "BlackPawn":
+                    pieceInitial = "p";
+                    break;
+                case "Knight":
+                    pieceInitial = "N";
+                    break;
+                case "King":
+                    pieceInitial = "K";
+                    break;
+                case "Bishop":
+                    pieceInitial = "B";
+                    break;
+                case "Rook":
+                    pieceInitial = "R";
+                    break;
+                case "Queen":
+                    pieceInitial = "Q";
+                    break;
+            }
+
+            if (!piece.IsWhite)
+            {
+                pieceInitial =  pieceInitial.ToLower();
+            }
+
+            return pieceInitial;
+        }
+
+        public static readonly List<string> BlackCells = new List<string>
+        {
+            "b8", "d8", "f8", "h8",
+            "a7", "c7", "e7", "g7",
+            "b6", "d6", "f6", "h6",
+            "a5", "c5", "e5", "g5",
+            "b4", "d4", "f4", "h4",
+            "a3", "c3", "e3", "g3",
+            "b2", "d2", "f2", "h2",
+            "a1", "c1", "e1", "g1"
+        };
+
+        public static readonly Dictionary<int, int> ArrayToCellColumn = new Dictionary<int, int>
+        {
+            // Column in Array to Column Cell
+            {0, 8 },
+            {1, 7 },
+            {2, 6 },
+            {3, 5 },
+            {4, 4 },
+            {5, 3 },
+            {6, 2 },
+            {7, 1 }
+        };
+
+        public static readonly Dictionary<int, char> ArrayToCellRow = new Dictionary<int, char>
+        {
+            // Row in Array to Row Cell
+            {0, 'a' },
+            {1, 'b' },
+            {2, 'c' },
+            {3, 'd' },
+            {4, 'e' },
+            {5, 'f' },
+            {6, 'g' },
+            {7, 'h' }
+        };
+
         // Can be condensed? Make one for each direction and have it be multiplied?
         public static readonly List<Move> WhitePawnMoves = new List<Move>
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ChessApp
 {
@@ -19,59 +20,28 @@ namespace ChessApp
             Bishop blackBishop = new Bishop(false, chessboard.Board[2, 4]);
             Queen whiteQueen = new Queen(true, chessboard.Board[1, 5]);
 
+            List<Pieces> pieces = new List<Pieces>
+            {
+                whitePawn,
+                blackPawn,
+                blackKnight,
+                whiteKing,
+                whiteRook,
+                blackBishop,
+                whiteQueen
+            };
 
             Console.WriteLine("The Pieces");
             chessboard.ClearMarkedLegalMoves();
             PrintBoardOccupiedAndLegal(chessboard);
 
-            Console.WriteLine("=====================================================");
-
-            Console.WriteLine("White Pawn");
-            chessboard.ClearMarkedLegalMoves();
-            chessboard.FindLegalMoves(whitePawn);
-            PrintBoardOccupiedAndLegal(chessboard);
-
-            Console.WriteLine("=====================================================");
-
-            Console.WriteLine("Black Pawn");
-            chessboard.ClearMarkedLegalMoves();
-            chessboard.FindLegalMoves(blackPawn);
-            PrintBoardOccupiedAndLegal(chessboard);
-
-            Console.WriteLine("=====================================================");
-
-            Console.WriteLine("Black Rook");
-            chessboard.ClearMarkedLegalMoves();
-            chessboard.FindLegalMoves(blackKnight);
-            PrintBoardOccupiedAndLegal(chessboard);
-
-            Console.WriteLine("=====================================================");
-
-            Console.WriteLine("White King");
-            chessboard.ClearMarkedLegalMoves();
-            chessboard.FindLegalMoves(whiteKing);
-            PrintBoardOccupiedAndLegal(chessboard);
-
-            Console.WriteLine("=====================================================");
-
-            Console.WriteLine("White Rook");
-            chessboard.ClearMarkedLegalMoves();
-            chessboard.FindLegalMoves(whiteRook);
-            PrintBoardOccupiedAndLegal(chessboard);
-
-            Console.WriteLine("=====================================================");
-
-            Console.WriteLine("Black Bishop");
-            chessboard.ClearMarkedLegalMoves();
-            chessboard.FindLegalMoves(blackBishop);
-            PrintBoardOccupiedAndLegal(chessboard);
-
-            Console.WriteLine("=====================================================");
-
-            Console.WriteLine("White Queen");
-            chessboard.ClearMarkedLegalMoves();
-            chessboard.FindLegalMoves(whiteQueen);
-            PrintBoardOccupiedAndLegal(chessboard);
+            foreach(Pieces piece in pieces)
+            {
+                Console.WriteLine("=====================================================");
+                chessboard.ClearMarkedLegalMoves();
+                chessboard.FindLegalMoves(piece);
+                PrintBoardOccupiedAndLegal(chessboard);
+            }
 
             Console.WriteLine("=====================================================");
 
@@ -92,6 +62,17 @@ namespace ChessApp
             chessboard.NewGame();
             PrintBoardOccupiedAndLegal(chessboard);
 
+            Console.WriteLine("=====================================================");
+
+            Console.WriteLine("Queen Moves");
+            chessboard.ClearBoard();
+            Queen queen = new Queen(true, chessboard.Board[4, 4]);
+            Pawn pawn = new Pawn(false, chessboard.Board[2, 4]);
+            PrintBoardOccupiedAndLegal(chessboard);
+
+            Console.WriteLine("=====================================================");
+
+            Console.WriteLine("Find Queen Obstruction");
 
         }
 

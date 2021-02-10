@@ -8,17 +8,6 @@ namespace ChessApp
 {
     public class Chessboard
     {
-        //private readonly Dictionary<int, char> chessAN = new Dictionary<int, char>()
-        //{
-        //    {1 , 'a'},
-        //    {2 , 'b'},
-        //    {3 , 'c'},
-        //    {4 , 'd'},
-        //    {5 , 'e'},
-        //    {6 , 'f'},
-        //    {7 , 'g'},
-        //    {8 , 'h'}
-        //};
 
         public Cell[,] Board { get; }
 
@@ -61,8 +50,6 @@ namespace ChessApp
         }
 
         // How to delete all pieces?
-        // How to allow cell to have capacity of one piece?
-        // Queue to let one piece take the place of other piece?
         public void ClearBoard()
         {
             foreach (Cell cell in Board)
